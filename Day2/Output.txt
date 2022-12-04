@@ -1,0 +1,5 @@
+A Rock  A Rock  - D 4
+B Paper  A Rock  - L 1
+C Scissors A Rock  - W 7
+
+Total Score: 12
