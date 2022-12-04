@@ -15,7 +15,7 @@ namespace Day2
             SaveData(games);
         }
 
-        private static List<Game> ReadData()
+        private List<Game> ReadData()
         {
             var data = File.ReadAllText("Day2\\Input1.txt");
             var lines = data.Split(Environment.NewLine);
@@ -39,7 +39,7 @@ namespace Day2
             return games;
         }
 
-        private static void SaveData(List<Game> games)
+        private void SaveData(List<Game> games)
         {
             var builder = new StringBuilder();
             foreach (var game in games)
