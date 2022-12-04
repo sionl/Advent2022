@@ -2,16 +2,16 @@
 {
     public static void Main(string[] args)
     {
-        if (args.Length < 0)
+        if (args.Length == 0)
         {
-            Console.WriteLine("Please provide day as input argument");
+            WriteError("Please provide day as input argument");
             return;
         }
 
         var day = args[0];
         if (!int.TryParse(day, out int dayInt))
         {
-            Console.WriteLine("Not a valday day input");
+            WriteError("Not a valday day input");
             return;
         }
 
@@ -23,18 +23,25 @@
 
         if (solutionType == null)
         {
-            Console.WriteLine("No solution found");
+            WriteError("No solution found");
             return;
         }
 
         var solution = Activator.CreateInstance(solutionType) as ISolution;
         if (solution == null)
         {
-            Console.WriteLine("No solution cound be created");
+            WriteError("No solution cound be created");
             return;
         }
 
         Console.WriteLine($"Solving Day {day}");
         solution.Run();
+    }
+
+    private static void WriteError(string errorMessage)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(errorMessage);
+        Console.ForegroundColor = ConsoleColor.White;
     }
 }
