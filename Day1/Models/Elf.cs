@@ -1,4 +1,4 @@
-namespace Models
+namespace Day1.Models
 {
     public class Elf
     {

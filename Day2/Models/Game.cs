@@ -1,4 +1,6 @@
-namespace Models
+using System;
+
+namespace Day2.Models
 {
     public class Game
     {
