@@ -3,11 +3,10 @@ using Day1.Models;
 
 namespace Day1
 {
-    public class Solution
+    public class Solution : ISolution
     {
         public void Run()
         {
-            Console.WriteLine("Solving Day 1");
             ReadData();
         }
 

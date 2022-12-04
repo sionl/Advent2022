@@ -3,19 +3,15 @@ using Day2.Models;
 
 namespace Day2
 {
-    public class Solution
+    public class Solution : ISolution
     {
         public void Run()
         {
-            Console.WriteLine("Solving Day 2");
-            Console.WriteLine("Reading Data");
             var games = ReadData();
 
-            Console.WriteLine("Playing Games");
             var gameSimulator = new GameSimulator();
             games = gameSimulator.Play(games);
 
-            Console.WriteLine("Saving Data");
             SaveData(games);
         }
 
