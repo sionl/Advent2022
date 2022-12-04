@@ -1,6 +1,3 @@
-
-using System;
-using System.Collections.Generic;
 using Day2.Models;
 
 namespace Day2

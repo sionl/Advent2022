@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Day1.Models;
 
 namespace Day1
@@ -11,7 +7,7 @@ namespace Day1
     {
         public void Run()
         {
-            Console.WriteLine("ReadData");
+            Console.WriteLine("Solving Day 1");
             ReadData();
         }
 

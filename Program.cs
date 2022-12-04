@@ -2,7 +2,7 @@
 {
     public static void Main(string[] args)
     {
-        var solution = new Day1.Solution();
+        var solution = new Day2.Solution();
         solution.Run();
     }
 }
