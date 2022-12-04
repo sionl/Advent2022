@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Day1
+﻿namespace Day1
 {
     public class Solution : ISolution
     {
@@ -8,6 +6,7 @@ namespace Day1
         {
             public int Number { get; set; }
             public int Calories { get; set; }
+            public string Ouput => $"{Number} - {Calories}";
         }
 
         public void Run()
@@ -33,20 +32,10 @@ namespace Day1
                 }
             }
 
-            var builder = new StringBuilder();
-            foreach (var item in elves)
-            {
-                builder.AppendLine($"{item.Number} - {item.Calories}");
-            }
-
-            builder.Append(Environment.NewLine);
-            var mostCalories = elves.Max(x => x.Calories);
-            builder.AppendLine($"The Most Calories: {mostCalories}");
-
-            builder.Append(Environment.NewLine);
-            var top3 = elves.OrderByDescending(x => x.Calories).Take(3).Sum(x => x.Calories);
-            builder.Append($"The Top3 Calories: {top3}");
-
+            var builder = new OutputBuilder();
+            builder.AppendLines(elves.Select(x => x.Ouput));
+            builder.AppendLine($"The Most Calories: {elves.Max(x => x.Calories)}");
+            builder.Append($"The Top3 Calories: {elves.OrderByDescending(x => x.Calories).Take(3).Sum(x => x.Calories)}");
             File.WriteAllText("Day1\\Output.txt", builder.ToString());
         }
     }

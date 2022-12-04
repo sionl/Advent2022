@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Day3
+﻿namespace Day3
 {
     public class Solution : ISolution
     {
@@ -14,12 +12,14 @@ namespace Day3
             public string Compartment2 { get; set; } = string.Empty;
             public char Part { get; set; }
             public int Priority { get; set; }
+            public string Output => $"{Contents} - {Compartment1} {Compartment2} - {Part} {Priority}";
         }
 
         private class Badge
         {
             public char Letter { get; set; }
             public int Priority { get; set; }
+            public string Output => $"{Letter} - {Priority}";
         }
 
         public void Run()
@@ -42,25 +42,11 @@ namespace Day3
                 }
             }
 
-            var builder = new StringBuilder();
-            foreach (var item in list)
-            {
-                builder.AppendLine($"{item.Contents} - {item.Compartment1} {item.Compartment2} - {item.Part} {item.Priority}");
-            }
-
-            builder.Append(Environment.NewLine);
-            foreach (var item in badges)
-            {
-                builder.AppendLine($"{item.Letter} - {item.Priority}");
-            }
-
-            builder.Append(Environment.NewLine);
-            var total = list.Sum(x => x.Priority);
-            builder.AppendLine($"Total Priority: {total}");
-
-            var badgeTotal = badges.Sum(x => x.Priority);
-            builder.Append($"Badge Priority: {badgeTotal}");
-
+            var builder = new OutputBuilder();
+            builder.AppendLines(list.Select(x => x.Output));
+            builder.AppendLines(badges.Select(x => x.Output));
+            builder.AppendLine($"Total Priority: {list.Sum(x => x.Priority)}");
+            builder.Append($"Badge Priority: {badges.Sum(x => x.Priority)}");
             File.WriteAllText("Day3\\Output.txt", builder.ToString());
         }
 

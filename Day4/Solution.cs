@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Day4
+﻿namespace Day4
 {
     public class Solution : ISolution
     {
@@ -16,8 +14,7 @@ namespace Day4
         public void Run()
         {
             var data = File.ReadAllText("Day4\\Input1.txt");
-            var lines = data.Split(Environment.NewLine);
-            list = lines.Select(x => new Pairs() { Line = x }).ToList();
+            list = data.Split(Environment.NewLine).Select(x => new Pairs() { Line = x }).ToList();
 
             foreach (var item in list)
             {
@@ -25,20 +22,10 @@ namespace Day4
                 item.PartRange = CheckPartRanges(item);
             }
 
-            var builder = new StringBuilder();
-            foreach (var item in list)
-            {
-                builder.AppendLine($"{item.Line} - {item.FullRange} - {item.PartRange}");
-            }
-
-            builder.Append(Environment.NewLine);
-            var totalFull = list.Count(x => x.FullRange);
-            builder.Append($"Full range Total: {totalFull}");
-
-            builder.Append(Environment.NewLine);
-            var totalPart = list.Count(x => x.PartRange);
-            builder.Append($"Part Range Total: {totalPart}");
-
+            var builder = new OutputBuilder();
+            builder.AppendLines(list.Select(item => $"{item.Line} - {item.FullRange} - {item.PartRange}"));
+            builder.AppendLine($"Full range Total: {list.Count(x => x.FullRange)}");
+            builder.Append($"Part Range Total: {list.Count(x => x.PartRange)}");
             File.WriteAllText("Day4\\Output.txt", builder.ToString());
         }
 

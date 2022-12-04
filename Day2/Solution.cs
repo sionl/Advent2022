@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Day2.Models;
+﻿using Day2.Models;
 
 namespace Day2
 {
@@ -41,15 +40,13 @@ namespace Day2
 
         private void SaveData(List<Game> games)
         {
-            var builder = new StringBuilder();
+            var builder = new OutputBuilder();
             foreach (var game in games)
             {
                 builder.AppendLine($"{game.Opp} {game.OppName} {game.MineStrat} {game.Mine} {game.MineName} - {game.Result} {game.Score}");
             }
 
-            builder.Append(Environment.NewLine);
-            var totalScore = games.Sum(x => x.Score);
-            builder.AppendLine($"Total Score: {totalScore}");
+            builder.AppendNewLine().Append($"Total Score: {games.Sum(x => x.Score)}");
 
             File.WriteAllText("Day2\\Output2.txt", builder.ToString());
         }
