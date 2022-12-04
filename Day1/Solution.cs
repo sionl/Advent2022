@@ -1,16 +1,16 @@
 ﻿using System.Text;
-using Day1.Models;
 
 namespace Day1
 {
     public class Solution : ISolution
     {
-        public void Run()
+        private class Elf
         {
-            ReadData();
+            public int Number { get; set; }
+            public int Calories { get; set; }
         }
 
-        private void ReadData()
+        public void Run()
         {
             var data = File.ReadAllText("Day1\\Input1.txt");
             var lines = data.Split(Environment.NewLine);
@@ -33,24 +33,19 @@ namespace Day1
                 }
             }
 
-            SaveData(elves);
-        }
-
-        private void SaveData(List<Elf> elves)
-        {
             var builder = new StringBuilder();
-            foreach (var elf in elves)
+            foreach (var item in elves)
             {
-                builder.AppendLine($"{elf.Number} - {elf.Calories}");
+                builder.AppendLine($"{item.Number} - {item.Calories}");
             }
 
             builder.Append(Environment.NewLine);
             var mostCalories = elves.Max(x => x.Calories);
-            builder.AppendLine($"The most Calories: {mostCalories}");
+            builder.AppendLine($"The Most Calories: {mostCalories}");
 
             builder.Append(Environment.NewLine);
             var top3 = elves.OrderByDescending(x => x.Calories).Take(3).Sum(x => x.Calories);
-            builder.AppendLine($"The Top3 Calories: {top3}");
+            builder.Append($"The Top3 Calories: {top3}");
 
             File.WriteAllText("Day1\\Output.txt", builder.ToString());
         }
