@@ -1,0 +1,11 @@
+1 - B F Q Z N R F
+2 - N R
+3 - D
+4 - F T T M S
+5 - C W V Q P P Q Q D N Q
+6 - W R
+7 - N D S T F M M J F L R
+8 - H C V C
+9 - H G N N T S Q H W V F M D
+
+Result: FRDSQRRCD
