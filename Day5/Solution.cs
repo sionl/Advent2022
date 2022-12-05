@@ -2,6 +2,7 @@
 {
     public class Solution : ISolution
     {
+        private bool Part1 = false;
         private List<StackItem> stackItems = new();
         private List<Instruction> instructions = new();
 
@@ -31,11 +32,32 @@
         {
             foreach (var instruction in instructions)
             {
-                for (int i = 0; i < instruction.Move; i++)
-                {
-                    var crate = stackItems[instruction.From - 1].Crates.Pop();
-                    stackItems[instruction.To - 1].Crates.Push(crate);
-                }
+                if (Part1)
+                    CranePart1(instruction);
+                else
+                    CranePart2(instruction);
+            }
+        }
+
+        private void CranePart1(Instruction instruction)
+        {
+            for (int i = 0; i < instruction.Move; i++)
+            {
+                var crate = stackItems[instruction.From - 1].Crates.Pop();
+                stackItems[instruction.To - 1].Crates.Push(crate);
+            }
+        }
+
+        private void CranePart2(Instruction instruction)
+        {
+            var move = new Stack<char>();
+            for (int i = 0; i < instruction.Move; i++)
+            {
+                move.Push(stackItems[instruction.From - 1].Crates.Pop());
+            }
+            for (int i = 0; i < instruction.Move; i++)
+            {
+                stackItems[instruction.To - 1].Crates.Push(move.Pop());
             }
         }
 

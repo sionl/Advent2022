@@ -1,11 +1,11 @@
-1 - B F Q Z N R F
-2 - N R
-3 - D
-4 - F T T M S
-5 - C W V Q P P Q Q D N Q
-6 - W R
-7 - N D S T F M M J F L R
-8 - H C V C
-9 - H G N N T S Q H W V F M D
+1 - F D F C D V H
+2 - Q R
+3 - F
+4 - R W C N T
+5 - M T Q J H S B W M P Q
+6 - Q V
+7 - N S Q M F V M C T R W
+8 - P D N N
+9 - S T F N Z G R F H Q D L N
 
-Result: FRDSQRRCD
+Result: HRFTQVWNN
