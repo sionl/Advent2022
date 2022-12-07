@@ -23,6 +23,15 @@ public class OutputBuilder
         return this;
     }
 
+    public OutputBuilder AppendSpaces(int number)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            builder.Append(" ");
+        }
+        return this;
+    }
+
     public OutputBuilder AppendLines(IEnumerable<string> lines)
     {
         foreach (var line in lines)
