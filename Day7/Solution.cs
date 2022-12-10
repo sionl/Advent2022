@@ -4,12 +4,15 @@
     {
         private Dir system = new() { Name = "/" };
         private OutputBuilder builder = new();
+        private int total = 0;
 
         private class Dir
         {
             public string Name { get; set; } = string.Empty;
+            public Dir Parent { get; set; } = null;
             public List<Dir> Directories { get; set; } = new();
             public List<File> Files { get; set; } = new();
+            public int Size { get; set; }
         }
 
         private class File
@@ -44,7 +47,7 @@
                     }
                     else if (dirName.Equals(".."))
                     {
-                        // To do
+                        current = current.Parent;
                     }
                     else
                     {
@@ -57,7 +60,11 @@
                 }
                 else if (line.StartsWith("dir"))
                 {
-                    var dir = new Dir() { Name = line.Substring(4) };
+                    var dir = new Dir()
+                    {
+                        Name = line.Substring(4),
+                        Parent = current
+                    };
                     current.Directories.Add(dir);
                 }
                 else // file
@@ -76,13 +83,39 @@
         private void OutputData()
         {
             OutputDir(system, 0);
+            builder.AppendNewLine();
+            builder.AppendLine($"Total: {total}");
+
+            FindSmallest(system);
+            builder.AppendLine($"Smallest: {smallest}");
             System.IO.File.WriteAllText("Day7\\Output.txt", builder.ToString());
+        }
+
+        private int smallest = 70000000;
+
+        private void FindSmallest(Dir dir)
+        {
+            int remaining = 70000000 - system.Size + dir.Size;
+            if (remaining > 30000000 && smallest > dir.Size)
+            {
+                smallest = dir.Size;
+            }
+            foreach (var folder in dir.Directories)
+            {
+                FindSmallest(folder);
+            }
         }
 
         private void OutputDir(Dir dir, int level)
         {
+            dir.Size = GetSize(dir);
+            if (dir.Size < 100000)
+            {
+                total += dir.Size;
+            }
+
             builder.AppendSpaces(level * 2);
-            builder.AppendLine($"- {dir.Name} (dir)");
+            builder.AppendLine($"- {dir.Name} (dir) - {dir.Size}");
 
             foreach (var folder in dir.Directories)
             {
@@ -94,6 +127,20 @@
                 builder.AppendSpaces(level * 2 + 2);
                 builder.AppendLine($"- {file.Name} (file) - {file.Size}");
             }
+        }
+
+        private int GetSize(Dir dir)
+        {
+            var size = 0;
+            foreach (var folder in dir.Directories)
+            {
+                size += GetSize(folder);
+            }
+            foreach (var file in dir.Files)
+            {
+                size += file.Size;
+            }
+            return size;
         }
     }
 }
